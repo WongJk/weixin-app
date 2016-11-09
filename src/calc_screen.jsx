@@ -9,7 +9,7 @@ const ReactDOM = require('react-dom');
 let CalcScreen = React.createClass({
     render: () => {
         return (
-            <div />
+            <div className="calc-screen">0</div>
         );
     }
 });

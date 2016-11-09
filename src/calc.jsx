@@ -9,14 +9,20 @@ const ReactDOM = require('react-dom');
 const CalcScreen = require('./calc_screen.jsx');
 const CalcPanel = require('./calc_panel.jsx');
 
-ReactDOM.render(
-    <CalcScreen />,
-    document.getElementById('calc-screen')
-);
+let Calc = React.createClass({
+    render: () => {
+        return (
+            <div>
+                <CalcScreen />
+                <CalcPanel />
+            </div>
+        );
+    }
+});
 
 ReactDOM.render(
-    <CalcPanel />,
-    document.getElementById('calc-panel')
+    <Calc />,
+    document.getElementById('calc-container')
 );
 
 

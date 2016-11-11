@@ -1,17 +1,17 @@
 /**
- *
+ * 计算器的屏幕控件
  * @author jk.wong
  */
 
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-let CalcScreen = React.createClass({
-    render: () => {
+class CalcScreen extends React.Component {
+    render() {
         return (
-            <div className="calc-screen">0</div>
+            <div className='calc-screen'>{this.props.value}</div>
         );
     }
-});
+}
 
 module.exports = CalcScreen;

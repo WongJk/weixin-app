@@ -1,50 +1,67 @@
 /**
- *
+ * 加蒜器的按钮盘控件
  * @author jk.wong
  */
 
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-let CalcPanel = React.createClass({
-    render: () => {
+// const _ = require('lodash');
+
+const CalcButton = require('./calc_button.jsx');
+
+class CalcPanel extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+
+        };
+
+        this.calcButtonClicked = this.calcButtonClicked.bind(this);
+    }
+
+    calcButtonClicked(value) {
+        let emitCommand = this.props.emitCommand;
+        emitCommand(value);
+    }
+
+    render() {
+
         return (
-            <div className="calc">
-                <div className="btn-row">
-                    <div className="calc-btn">AC</div>
-                    <div className="calc-btn">+/-</div>
-                    <div className="calc-btn">%</div>
-                    <div className="calc-btn calc-operator-btn">/</div>
+            <div className='calc-panel'>
+                <div className='btn-row'>
+                    <CalcButton clickCb={this.calcButtonClicked} value='AC' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='+/-' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='%' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='/' />
                 </div>
-                <div className="btn-row">
-                    <div className="calc-btn">7</div>
-                    <div className="calc-btn">8</div>
-                    <div className="calc-btn">9</div>
-                    <div className="calc-btn calc-operator-btn">*</div>
+                <div className='btn-row'>
+                    <CalcButton clickCb={this.calcButtonClicked} value='7' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='8' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='9' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='*' />
                 </div>
-                <div className="btn-row">
-                    <div className="calc-btn">4</div>
-                    <div className="calc-btn">5</div>
-                    <div className="calc-btn">6</div>
-                    <div className="calc-btn calc-operator-btn">-</div>
+                <div className='btn-row'>
+                    <CalcButton clickCb={this.calcButtonClicked} value='4' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='5' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='6' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='-' />
                 </div>
-                <div className="btn-row">
-                    <div className="calc-btn">1</div>
-                    <div className="calc-btn">2</div>
-                    <div className="calc-btn">3</div>
-                    <div className="calc-btn calc-operator-btn">+</div>
+                <div className='btn-row'>
+                    <CalcButton clickCb={this.calcButtonClicked} value='1' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='2' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='3' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='+' />
                 </div>
-                <div className="btn-row">
-                    <div className="calc-btn calc-btn-2">
-                        <div className="calc-btn-2-sub">0</div>
-                        <div className="calc-btn-2-sub"></div>
-                    </div>
-                    <div className="calc-btn">.</div>
-                    <div className="calc-btn calc-operator-btn">=</div>
+                <div className='btn-row'>
+                    <CalcButton clickCb={this.calcButtonClicked} value='0' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='.' />
+                    <CalcButton clickCb={this.calcButtonClicked} value='=' />
                 </div>
             </div>
         );
     }
-});
+};
 
 module.exports = CalcPanel;

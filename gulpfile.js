@@ -59,7 +59,10 @@ const doBundle = (b) => {
 
     return b.external(externalLib)
         .bundle()
-        .on('error', console.error.bind(console))
+        .on('error', (err) => {
+            console.log(err);
+            console.log(err.codeFrame);
+        })
         .pipe(source('app.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({

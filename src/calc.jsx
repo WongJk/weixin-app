@@ -28,18 +28,6 @@ class Calc extends React.Component {
     }
 
     /**
-     * 计算
-     * @param  {string} command 输入的单个命令
-     * @return {number|string}  计算的结果
-     */
-    calculate(command) {
-        //////////
-        // 计算逻辑 //
-        //////////
-        return command;
-    }
-
-    /**
      * React组件之间通信，有病，得治
      * @param  {string} command 计算器按钮的按键
      */

@@ -10,6 +10,8 @@ const CalcScreen = require('./calc_screen.jsx');
 const CalcPanel = require('./calc_panel.jsx');
 const CalcVoice = require('./calc_voice.jsx');
 
+const CalcCore = require('./calc_core.jsx');
+
 class Calc extends React.Component {
 
     constructor(props) {
@@ -19,6 +21,8 @@ class Calc extends React.Component {
             value: this.props.value,
             command: 'hello, guys!'
         };
+
+        this.core = new CalcCore();
 
         this.transmit = this.transmit.bind(this);
     }
@@ -44,12 +48,10 @@ class Calc extends React.Component {
             command
         });
 
-        ///////////////////
-        // 计算之前的判断逻辑todo //
-        ///////////////////
+        this.core.input(command);
 
         this.setState({
-            value: this.calculate(command)
+            value: this.core.output()
         });
     }
 

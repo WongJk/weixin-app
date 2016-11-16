@@ -34,7 +34,7 @@ const externalLib = [
 ];
 
 const browserifyConfig = {
-    entries: ['src/calc.jsx'],
+    entries: ['src/app.jsx'],
     transform: [babelify],
     // plugin: ['browserify-shim'],
     debug: true

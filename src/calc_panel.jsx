@@ -6,12 +6,9 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-const ReactRedux = require('react-redux');
 // const _ = require('lodash');
 
 const CalcButton = require('./calc_button.jsx');
-
-const actions = require('./redux-action/actions.js')
 
 class CalcPanel extends React.Component {
 
@@ -25,8 +22,8 @@ class CalcPanel extends React.Component {
     }
 
     calcButtonClicked(value) {
-        let dispatch = this.props.dispatch;
-        dispatch(actions.updateCommand(value));
+        let emitCommand = this.props.emitCommand;
+        emitCommand(value);
     }
 
     render() {
@@ -67,5 +64,4 @@ class CalcPanel extends React.Component {
     }
 };
 
-// 只注入dispatch，不监听store
-module.exports = ReactRedux.connect()(CalcPanel);
+module.exports = CalcPanel;

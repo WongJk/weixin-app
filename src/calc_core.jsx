@@ -68,9 +68,26 @@ class CalcCore {
 
         // 进入stageN时的回调
         let onenterstage0 = function (event, from, to, command, optMsg = {}) {
+            // 当从*状态转移到stage0时的处理
+            if (command === '=') {
+                let args = [
+                    core.a, core.op1, core.b, core.op2, core.c
+                ].map(x => x === null ? '' : x);
+                console.log(...args);
+                core.a = core.evaluate(...args);
+
+                // 重置除了a之外的变量
+                [
+                    core.a, core.op1, core.b, core.op2, core.c
+                ] = [
+                    core.a, null, null, null, null
+                ];
+            }
             // 初始化 initial 时，command是undefined
-            command = command || 0;
-            core.a = core.refreshNumber(core.a, command);
+            else {
+                command = command || 0;
+                core.a = core.refreshNumber(core.a, command);
+            }
             core.value = core.a;
         };
         // 离开stageN时的回调
@@ -136,6 +153,7 @@ class CalcCore {
              *     number表示输入 数字
              *     addsub表示输入 +,-
              *     muldiv表示输入 *,/
+             *     equal 表示输入 =
              */
             events: [
                 /* start stage0 */
@@ -169,8 +187,9 @@ class CalcCore {
                 /* end stage6, start stage7 */
                 {name: 'number', from: 'stage7', to: 'stage3'},
                 {name: 'addsub', from: 'stage7', to: 'stage7'},
-                {name: 'muldiv', from: 'stage7', to: 'stage4'}
+                {name: 'muldiv', from: 'stage7', to: 'stage4'},
                 /* end stage7 */
+                {name: 'equal',  from: '*',      to: 'stage0'}
             ],
             callbacks: {
                 /**
@@ -275,19 +294,7 @@ class CalcCore {
             });
         }
         else if (command === '=') {
-            let args = [
-                this.a, this.op1, this.b, this.op2, this.c
-            ].map(x => x === null ? '' : x);
-            console.log(...args);
-            this.a = this.evaluate(...args);
-            this.value = this.a;
-
-            // 重置除了a之外的变量
-            [
-                this.a, this.op1, this.b, this.op2, this.c
-            ] = [
-                this.a, null, null, null, null
-            ];
+            this.sm.equal(command);
         }
         else {
             console.log(`not support ${command} yet.`);
